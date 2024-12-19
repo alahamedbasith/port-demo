@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 # MongoDB setup
-uri = "mongodb://ahamedbasith:4wT8JLcZjWkzPRPI@clusterweb.s5tsj.mongodb.net/?retryWrites=true&w=majority&appName=ClusterWeb"
+uri = "mongodb+srv://ahamedbasith:4wT8JLcZjWkzPRPI@clusterweb.s5tsj.mongodb.net/?retryWrites=true&w=majority&appName=ClusterWeb"
 client = motor.motor_asyncio.AsyncIOMotorClient(uri)
 
 # Send a ping to confirm a successful connection
