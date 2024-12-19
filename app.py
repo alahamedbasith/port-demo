@@ -39,13 +39,18 @@ class Content(BaseModel):
 
 @app.post("/update_content/")
 async def update_content(html_content: str = Form(...)):
-    # Save content to MongoDB
-    await collection.update_one(
-        {"_id": "content"},
-        {"$set": {"html_content": html_content}},
-        upsert=True
-    )
-    return {"message": "Content updated successfully"}
+    try:
+        # Save content to MongoDB
+        await collection.update_one(
+            {"_id": "content"},
+            {"$set": {"html_content": html_content}},
+            upsert=True
+        )
+        return {"message": "Content updated successfully"}
+    except Exception as e:
+        print(f"Error updating content: {e}")
+        raise HTTPException(status_code=500, detail="Failed to update content")
+
 
 @app.get("/portfolio", response_class=HTMLResponse)
 async def portfolio():
