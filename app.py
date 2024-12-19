@@ -40,15 +40,16 @@ class Content(BaseModel):
 @app.post("/update_content/")
 async def update_content(html_content: str = Form(...)):
     try:
-        # Save content to MongoDB
-        await collection.update_one(
+        result = await collection.update_one(
             {"_id": "content"},
             {"$set": {"html_content": html_content}},
             upsert=True
         )
-        return {"message": "Content updated successfully"}
+        if result.modified_count or result.upserted_id:
+            return {"message": "Content updated successfully"}
+        return {"message": "No changes were made"}
     except Exception as e:
-        print(f"Error updating content: {e}")
+        print(f"Error updating MongoDB: {e}")
         raise HTTPException(status_code=500, detail="Failed to update content")
 
 
