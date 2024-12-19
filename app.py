@@ -50,7 +50,7 @@ async def update_content(html_content: str = Form(...)):
         return {"message": "No changes were made"}
     except Exception as e:
         print(f"Error updating MongoDB: {e}")
-        raise HTTPException(status_code=500, detail="Failed to update content")
+        raise HTTPException(status_code=500, detail="Failed to update content mongodb error")
 
 
 @app.get("/portfolio", response_class=HTMLResponse)
